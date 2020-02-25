@@ -1,0 +1,19 @@
+/*.container {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container #logo {
+    text-align: right;
+}
+
+.container #logo p {
+    font-size: 40px;
+}*/
