@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import styled from "styled-components";
 
-function SearchBar({ className, styles, term, setTerm, handleKeyPress, search }) {
+function SearchBar({ className, styles, handleKeyPress, handleSearch }) {
     const stylesheet = styles();
+
+    const [ term, setTerm ] = useState('');
 
     return (
         <div className={className}>
@@ -14,11 +16,11 @@ function SearchBar({ className, styles, term, setTerm, handleKeyPress, search })
                     placeholder="Insira o termo desejado para a pesquisa"
                     value={term}
                     onChange={event => setTerm(event.target.value)}
-                    onKeyPress={handleKeyPress} 
+                    onKeyPress={event => handleKeyPress(event, term)} 
                 />
                 <IconButton 
                     className={stylesheet.button} 
-                    onClick={() => search(term)}
+                    onClick={() => handleSearch(term)}
                 >
                     <SearchIcon />
                 </IconButton>
@@ -71,4 +73,57 @@ const SearchHome = styled(SearchBar)`
     }
 `;
 
-export default SearchHome;
+const SearchHeader = styled(SearchBar)`
+    width: 550px;
+    margin-right: 50px;
+
+    #search-bar {
+        width: calc(95% + 40px);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #search-bar input {
+        font-family: 'Sarala';
+        width: 95%;
+        height: 40px;
+        border: none;
+        padding-left: 10px;
+        background-color: #A4A4A4;
+        border-radius: 10px 0 0 10px;
+    }
+
+    @media (max-width: 850px) {
+        & {
+            width: 450px;
+        }
+    }
+
+    @media (max-width: 770px) {
+        & {
+            width: 300px;
+        }
+
+        #search-bar {
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 400px) {
+        & {
+            width: 300px;
+            margin-right: 10px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        & {
+            width: 300px;
+        }
+    }
+`;
+
+export { SearchHome, SearchHeader };

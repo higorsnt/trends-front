@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import LogoHome from '../../components/Logo';
-import SearchHome from '../../components/SearchBar';
+import { LogoHome } from '../../components/Logo';
+import { SearchHome } from '../../components/SearchBar';
 
 import './styles.css';
 
 export default function Home({ history }) {
-    const [ term, setTerm ] = useState('');
 
-    function handleKeyPress(event) {
+    function handleKeyPress(event, term) {
         if (event.key === 'Enter') {
             handleSearch(term);
         }
@@ -17,7 +16,8 @@ export default function Home({ history }) {
 
     function handleSearch(term) {
         if (term.trim() !== '') {
-            history.push(`/search/${term}`);
+            sessionStorage.setItem('term', term);
+            history.push('/search');
         }
     }
 
@@ -25,10 +25,8 @@ export default function Home({ history }) {
         <div className="container">
             <LogoHome />
             <SearchHome 
-                term={term}
-                setTerm={setTerm}
-                styles={useStyles} 
-                search={handleSearch}
+                styles={useStyles}
+                handleSearch={handleSearch}
                 handleKeyPress={handleKeyPress}
             />
         </div>
