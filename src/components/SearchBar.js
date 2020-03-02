@@ -16,11 +16,11 @@ function SearchBar({ className, styles, handleKeyPress, handleSearch }) {
                     placeholder="Insira o termo desejado para a pesquisa"
                     value={term}
                     onChange={event => setTerm(event.target.value)}
-                    onKeyPress={event => handleKeyPress(event, term)} 
+                    onKeyPress={event => handleKeyPress(event, term, setTerm)} 
                 />
                 <IconButton 
                     className={stylesheet.button} 
-                    onClick={() => handleSearch(term)}
+                    onClick={() => handleSearch(term, setTerm)}
                 >
                     <SearchIcon />
                 </IconButton>

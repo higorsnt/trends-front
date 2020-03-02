@@ -22,16 +22,17 @@ export default function Search() {
       setHashtags(response.data);
     }
 
-    function handleKeyPress(event, term) {
+    function handleKeyPress(event, term, setTerm) {
       if (event.key === 'Enter') {
-          handleSearch(term);
+          handleSearch(term, setTerm);
       }
     }
 
-    async function handleSearch(term) {
+    async function handleSearch(term, setTerm) {
       if (term.trim() !== '') {
         sessionStorage.setItem('term', term);
         getResults();
+        setTerm("");
       }
     }
 
